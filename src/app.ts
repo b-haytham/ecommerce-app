@@ -2,6 +2,9 @@ import express from 'express';
 import productRouter from './routes/product';
 import userRouter from './routes/users';
 import categoryRouter from './routes/category';
+
+
+
 const app = express();
 
 app.use(express.json());
