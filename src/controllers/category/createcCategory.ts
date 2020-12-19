@@ -3,7 +3,7 @@ import Category from '../../models/Category';
 
 
 
-export const createUser = async (
+export const createCategory = async (
     req: Request,
     res: Response,
 
