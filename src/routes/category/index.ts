@@ -1,6 +1,7 @@
 
-import { createCategory } from '../../controllers/category/createcCategory';
+
 import express from "express";
+import { createCategory } from "../../controllers/category/createcCategory";
 
 const categoryRouter = express.Router();
 
