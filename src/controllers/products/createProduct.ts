@@ -3,7 +3,7 @@ import Product from '../../models/Product';
 
 
 
-export const createUser = async (
+export const createProduct = async (
 	req: Request,
 	res: Response,
 
