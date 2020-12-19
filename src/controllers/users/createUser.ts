@@ -8,7 +8,7 @@ export const createUser = async (
 	next: NextFunction
 ) => {
 	const { username, email, password } = req.body;
-
+/*
 	const isUserExist = await User.findOne({ email });
 
 	if (isUserExist) {
@@ -16,7 +16,7 @@ export const createUser = async (
 			.status(400)
 			.json({ error: { message: 'User already exist' } });
 	}
-
+*/
 	const user = User.build({
 		username,
 		first_name: null,
