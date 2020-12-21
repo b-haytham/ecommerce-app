@@ -1,3 +1,8 @@
+#  eCommerce Project
+eCommerce backend  Project 
+
+Using TypeScript with Node.js and Express
+
 ## Models
 
 ### Users
@@ -41,3 +46,35 @@
 
 -   user -> Users
 -   Products -> []Product
+
+
+
+### Env Variables
+
+Create a .env file in then root and add the following
+
+```
+MONGO_URI=MONGO_URI=mongodb+srv://username:password@cluster0.xqhsk.mongodb.net/DBname
+```
+
+### Install Dependencies (frontend & backend)
+
+```
+npm install
+```
+
+### Run
+
+```
+# dev (:3000) 
+npm run dev
+
+```
+
+## Build 
+
+```
+# Create backend prod build
+
+npm run build
+```
