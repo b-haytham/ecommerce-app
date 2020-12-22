@@ -36,6 +36,7 @@ interface UserDoc extends mongoose.Document {
 	city: string | null;
 	country: string | null;
 	postal_code: number | null;
+	matchesPassword: (password: string) => Promise<boolean>;
 }
 
 const userSchema = new mongoose.Schema(
