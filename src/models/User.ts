@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { UserRoles } from './types';
+
 import bcrypt from 'bcrypt'
 
 interface UserAttrs {
@@ -10,7 +10,7 @@ interface UserAttrs {
 	password: string;
 	isVerified: boolean;
 	shipping_address: string | null;
-	role: UserRoles;
+	isAdmin: boolean;
 	address: string | null;
 	phone: string | null;
 	city: string | null;
@@ -30,7 +30,7 @@ interface UserDoc extends mongoose.Document {
 	password: string;
 	isVerified: boolean;
 	shipping_address: string | null;
-	role: UserRoles;
+	isAdmin: boolean;
 	address: string | null;
 	phone: string | null;
 	city: string | null;
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
 		password: { type: String, required: true },
 		isVerified: { type: Boolean, required: true, default: false },
 		shipping_address: { type: String },
-		role: { type: String, required: true },
+		isAdmin: { type: Boolean, required: true, default: false },
 		address: { type: String },
 		phone: { type: String },
 		city: { type: String },
