@@ -4,6 +4,7 @@ import { createUser } from '../../controllers/users/createUser';
 import { deleteUser } from '../../controllers/users/deleteUser';
 import { getUserProfile } from '../../controllers/users/getUserProfile';
 import { getUsers } from '../../controllers/users/getUsers';
+import { updateUser } from '../../controllers/users/updateUser';
 import { updateUserProfile } from '../../controllers/users/updateUserProfile';
 
 
@@ -14,6 +15,6 @@ userRouter.post('/login', authUser);
 userRouter.get('/' , getUsers)
 userRouter.get('/:id' , getUserProfile);
 userRouter.delete('/:id' , deleteUser);
-userRouter.put('/:id', updateUserProfile) 
-
+userRouter.put('/profile/:id', updateUserProfile) 
+userRouter.put('/:id', updateUser)
 export default userRouter;
