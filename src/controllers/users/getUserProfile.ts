@@ -5,8 +5,8 @@ import {  Request, Response } from 'express';
 
  export const getUserProfile = asyncHandler(async (req: Request,
 	res: Response) => {
- 
-    const user = await User.findById(req.params.id)
+    const  user_id = req.params.id
+    const user = await User.findById(user_id)
   
     if (user) {
       res.json({

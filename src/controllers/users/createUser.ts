@@ -42,7 +42,7 @@ export const createUser =
 			});
 			await user.save();
 
-			if (user) {
+		
 				res.status(201).json({
 					_id: user._id,
 					username: user.username,
@@ -50,17 +50,12 @@ export const createUser =
 
 					token: generateToken(user._id),
 				})
-			} else {
-				res.status(400)
-				throw new Error('Invalid user data')
+		
 
 
 
 
-
-
-
-			}
+			
 		} catch (error) {
 			console.log(error)
 			res.json(error);
