@@ -12,7 +12,7 @@ export const createUser =
 	) => {
 
 		await check("email", "Email is not valid").isEmail().run(req);
-		await check("password", "Password cannot be blank").isLength({ min: 5 }).run(req);
+		await check("password", "Password must be at least 8 characters long").isLength({ min: 8 }).run(req);
 
 		// validator error comming from req.body
 		const errors = validationResult(req);

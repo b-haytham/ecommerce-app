@@ -8,10 +8,12 @@ import { updateUser } from '../../controllers/users/updateUser';
 import { updateUserProfile } from '../../controllers/users/updateUserProfile';
 
 
+
 const userRouter = express.Router();
 
 userRouter.post('/', createUser);
 userRouter.post('/login', authUser);
+
 userRouter.get('/' , getUsers)
 userRouter.get('/:id' , getUserProfile);
 userRouter.delete('/:id' , deleteUser);
