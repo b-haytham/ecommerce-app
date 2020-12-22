@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { UserRoles } from './types';
+import bcrypt from 'bcrypt'
 
 interface UserAttrs {
 	username: string;
@@ -62,7 +63,22 @@ const userSchema = new mongoose.Schema(
 		},
 	}
 );
+// hash password
 
+userSchema.pre<UserDoc>("save", async function () {
+	if (this.isModified("password")) {
+	  const hash = await bcrypt.hashSync(String(this.password), 10);
+	  this.password = hash;
+	}
+  });
+  
+  // check if password matches the hash password
+  userSchema.methods.matchesPassword = function (password: string) {
+	if (!this.password) {
+	  return false;
+	}
+	return bcrypt.compareSync(password, this.password);
+  };
 userSchema.statics.build = (attrs: UserAttrs) => {
 	return new User(attrs);
 };
