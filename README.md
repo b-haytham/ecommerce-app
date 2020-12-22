@@ -1,4 +1,4 @@
-# [eCommerce Project]
+# [eCommerce Project] &middot; 
 
 eCommerce backend  Project 
 
