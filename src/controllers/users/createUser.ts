@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { UserRoles } from '../../models/types';
 import User from '../../models/User';
 import { check, validationResult } from "express-validator";
 import generateToken from '../../util/generateToken';
@@ -32,7 +31,7 @@ export const createUser =
 				email,
 				password,
 				shipping_address: null,
-				role: UserRoles.USER,
+				isAdmin : false ,
 				address: null,
 				phone: null,
 				city: null,
