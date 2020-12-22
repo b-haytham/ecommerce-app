@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { UserRoles } from '../../models/types';
 import User from '../../models/User';
 import { check, validationResult } from "express-validator";
 import generateToken from '../../util/generateToken';
@@ -52,22 +51,22 @@ export const createUser =
 		});
 		await user.save();
 
-
 		if (user) {
 			res.status(201).json({
-				_id: user._id,
-				username: user.username,
-				email: user.email,
-
-				token: generateToken(user._id),
+			  _id: user._id,
+			  username: user.username,
+			  email: user.email,
+			
+			  token: generateToken(user._id),
 			})
-		} else {
+		  } else {
 			res.status(400)
 			throw new Error('Invalid user data')
+		  }
+		
 
 
 
 
 
-		};
-	}
+		};	
