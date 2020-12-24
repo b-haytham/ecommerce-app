@@ -1,4 +1,6 @@
-#  eCommerce Project
+# [eCommerce Project] &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE)
+
+
 eCommerce backend  Project 
 
 Using TypeScript with Node.js and Express

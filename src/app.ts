@@ -3,6 +3,8 @@ import categoryRouter from './routes/category';
 
 import productRouter from './routes/product';
 import userRouter from './routes/users';
+import cors from 'cors';
+
 
 
 
@@ -10,7 +12,7 @@ import userRouter from './routes/users';
 const app = express();
 
 app.use(express.json());
-
+app.use(cors())
 app.get('/', (req, res) => res.send('hello'));
 
 app.use('/api/users', userRouter);

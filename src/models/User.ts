@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { UserRoles } from './types';
+
+import bcrypt from 'bcrypt'
 
 interface UserAttrs {
 	username: string;
@@ -9,7 +10,7 @@ interface UserAttrs {
 	password: string;
 	isVerified: boolean;
 	shipping_address: string | null;
-	role: UserRoles;
+	isAdmin: boolean;
 	address: string | null;
 	phone: string | null;
 	city: string | null;
@@ -29,12 +30,13 @@ interface UserDoc extends mongoose.Document {
 	password: string;
 	isVerified: boolean;
 	shipping_address: string | null;
-	role: UserRoles;
+	isAdmin: boolean;
 	address: string | null;
 	phone: string | null;
 	city: string | null;
 	country: string | null;
 	postal_code: number | null;
+	matchesPassword: (password: string) => Promise<boolean>;
 }
 
 const userSchema = new mongoose.Schema(
@@ -46,7 +48,7 @@ const userSchema = new mongoose.Schema(
 		password: { type: String, required: true },
 		isVerified: { type: Boolean, required: true, default: false },
 		shipping_address: { type: String },
-		role: { type: String, required: true },
+		isAdmin: { type: Boolean, required: true, default: false },
 		address: { type: String },
 		phone: { type: String },
 		city: { type: String },
@@ -62,7 +64,22 @@ const userSchema = new mongoose.Schema(
 		},
 	}
 );
+// hash password
 
+userSchema.pre<UserDoc>("save", async function () {
+	if (this.isModified("password")) {
+	  const hash = await bcrypt.hashSync(String(this.password), 10);
+	  this.password = hash;
+	}
+  });
+  
+  // check if password matches the hash password
+  userSchema.methods.matchesPassword = function (password: string) {
+	if (!this.password) {
+	  return false;
+	}
+	return bcrypt.compareSync(password, this.password);
+  };
 userSchema.statics.build = (attrs: UserAttrs) => {
 	return new User(attrs);
 };
