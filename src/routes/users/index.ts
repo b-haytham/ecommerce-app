@@ -7,13 +7,13 @@ import { getUsers } from '../../controllers/users/getUsers';
 import { updateUser } from '../../controllers/users/updateUser';
 import { updateUserProfile } from '../../controllers/users/updateUserProfile';
 import { runValidation } from '../../validators';
-import { userSigninValidator } from '../../validators/auth';
+import { userSigninValidator, userSignupValidator } from '../../validators/auth';
 
 
 
 const userRouter = express.Router();
 
-userRouter.post('/', createUser);
+userRouter.post('/',userSignupValidator, runValidation , createUser);
 userRouter.post('/login', userSigninValidator, runValidation, authUser);
 
 userRouter.get('/' , getUsers)
