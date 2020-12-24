@@ -21,7 +21,7 @@ const start = async () => {
 		console.error(error);
 	}
 
-	app.listen(3000, () => console.log('>>>> listenig'));
+	app.listen(5000, () => console.log('>>>> listenig'));
 };
 
 start();
