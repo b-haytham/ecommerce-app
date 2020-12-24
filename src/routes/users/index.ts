@@ -5,7 +5,8 @@ import { deleteUser } from '../../controllers/users/deleteUser';
 import { getUserProfile } from '../../controllers/users/getUserProfile';
 import { getUsers } from '../../controllers/users/getUsers';
 import { updateUser } from '../../controllers/users/updateUser';
-import { updateUserProfile } from '../../controllers/users/updateUserProfile';
+import { updateUserProfile, updateUserProfile1 } from '../../controllers/users/updateUserProfile';
+import { admin, protect } from '../../middleware/authMiddleware';
 import { runValidation } from '../../validators';
 import { userSigninValidator, userSignupValidator } from '../../validators/auth';
 
@@ -18,7 +19,8 @@ userRouter.post('/login', userSigninValidator, runValidation, authUser);
 
 userRouter.get('/' , getUsers)
 userRouter.get('/:id' , getUserProfile);
-userRouter.delete('/:id' , deleteUser);
-userRouter.put('/profile/:id', updateUserProfile) 
-userRouter.put('/:id', updateUser)
+userRouter.delete('/:id', admin , deleteUser);
+userRouter.put('/profile/:id' , protect, updateUserProfile) 
+//userRouter.put('/:id', admin , updateUser)
+userRouter.put('/la' , protect , updateUserProfile1)
 export default userRouter;

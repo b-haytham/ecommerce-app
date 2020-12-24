@@ -3,7 +3,8 @@ import asyncHandler from 'express-async-handler'
 import User from '../models/User'
 import { NextFunction, Request, Response } from 'express';
 
-const protect = asyncHandler(async (req: Request,
+
+const protect = asyncHandler(async ( req: Request,
   res: Response,
   next: NextFunction) => {
   let token
@@ -16,9 +17,16 @@ const protect = asyncHandler(async (req: Request,
       token = req.headers.authorization.split(' ')[1]
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET!)
+      //@ts-ignore
+      const existingUser  = await User.findById(decoded.id).select('-password')
 
-      req.user = await User.findById(decoded.id).select('-password')
-     
+      if(existingUser) {
+        //@ts-ignore
+        req.user = existingUser
+      } else {
+        throw new Error("NOT Found")
+      }
+
       next()
     } catch (error) {
       console.error(error)
@@ -33,9 +41,10 @@ const protect = asyncHandler(async (req: Request,
   }
 })
 
-const admin = (req: Request,
+const admin = ( req: Request,
   res: Response,
-  next: NextFunction) => {
+  next: NextFunction)  => {
+    //@ts-ignore
   if (req.user && req.user.isAdmin) {
     next()
   } else {
